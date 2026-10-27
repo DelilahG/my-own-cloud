@@ -1,0 +1,47 @@
+{
+  "name": "@myowncloud/server",
+  "version": "1.0.0",
+  "private": true,
+  "type": "module",
+  "main": "dist/index.js",
+  "scripts": {
+    "dev": "tsx watch --clear-screen=false src/index.ts",
+    "build": "tsc -p tsconfig.build.json",
+    "start": "node dist/index.js",
+    "typecheck": "tsc -p tsconfig.json --noEmit",
+    "migrate": "tsx src/db/migrate-cli.ts",
+    "seed": "tsx src/db/seed.ts",
+    "storage:gc": "tsx src/db/storage-gc.ts",
+    "user:quota": "tsx src/db/set-quota.ts",
+    "test": "vitest run",
+    "test:watch": "vitest"
+  },
+  "dependencies": {
+    "bcryptjs": "^3.0.2",
+    "cookie-parser": "^1.4.7",
+    "cors": "^2.8.5",
+    "dotenv": "^16.4.7",
+    "express": "^5.1.0",
+    "express-rate-limit": "^7.5.0",
+    "file-type": "^22.2.0",
+    "helmet": "^8.1.0",
+    "mime-types": "^3.0.1",
+    "multer": "^2.0.1",
+    "pg": "^8.13.1",
+    "zod": "~4.6.6"
+  },
+  "devDependencies": {
+    "@types/cookie-parser": "^1.4.8",
+    "@types/cors": "^2.8.17",
+    "@types/express": "^5.0.1",
+    "@types/mime-types": "^2.1.4",
+    "@types/multer": "^1.4.12",
+    "@types/node": "^22.15.0",
+    "@types/pg": "^8.11.11",
+    "@types/supertest": "^6.0.3",
+    "supertest": "^7.1.0",
+    "tsx": "^4.19.3",
+    "typescript": "~5.8.3",
+    "vitest": "~5.0.3"
+  }
+}

@@ -1,0 +1,23 @@
+node_modules/
+dist/
+coverage/
+*.log
+
+# Secrets / local configuration
+.env
+.env.*
+!.env.example
+
+# Local PostgreSQL cluster created by `npm run db:start`
+.pgdata/
+
+# Uploaded file bytes (private storage). Anchored so the source folder
+# server/src/storage/ is NOT ignored.
+/storage/
+/server/storage/
+/server/test-storage/
+
+.DS_Store
+Thumbs.db
+.vscode/*
+!.vscode/extensions.json

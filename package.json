@@ -1,0 +1,35 @@
+{
+  "name": "my-own-cloud",
+  "version": "1.0.0",
+  "private": true,
+  "description": "My Own Cloud — a personal cloud-storage web application (React + Express + PostgreSQL).",
+  "workspaces": [
+    "server",
+    "client"
+  ],
+  "scripts": {
+    "setup": "node scripts/setup.mjs",
+    "db:start": "node scripts/local-postgres.mjs",
+    "db:migrate": "npm run migrate -w server",
+    "db:seed": "npm run seed -w server",
+    "storage:gc": "npm run storage:gc -w server --",
+    "user:quota": "npm run user:quota -w server --",
+    "dev": "concurrently -k -n server,client -c blue,magenta \"npm run dev -w server\" \"npm run dev -w client\"",
+    "dev:all": "concurrently -k -n db,server,client -c gray,blue,magenta \"npm run db:start\" \"node scripts/wait-for-db.mjs && npm run dev -w server\" \"npm run dev -w client\"",
+    "build": "npm run build -w server && npm run build -w client",
+    "start": "npm run start -w server",
+    "typecheck": "npm run typecheck -w server && npm run typecheck -w client",
+    "test": "npm run test -w server && npm run test -w client",
+    "test:e2e": "node scripts/e2e-smoke.mjs"
+  },
+  "devDependencies": {
+    "concurrently": "^9.1.2",
+    "dotenv": "^16.4.7",
+    "embedded-postgres": "17.10.0-beta.17",
+    "pg": "^8.13.1",
+    "playwright-core": "1.52.0"
+  },
+  "engines": {
+    "node": ">=20"
+  }
+}

@@ -1,0 +1,166 @@
+@import '@fontsource-variable/inter';
+@import 'tailwindcss';
+
+/* Dark mode is driven by a `dark` class on <html> (see theme-init.js / useTheme). */
+@custom-variant dark (&:where(.dark, .dark *));
+
+/* Semantic colour tokens. Components use these names (bg-surface, text-fg,
+   border-line, ...), so the whole UI switches theme by swapping variables. */
+@theme inline {
+  --font-sans: 'Inter Variable', ui-sans-serif, system-ui, -apple-system, 'Segoe UI', Roboto, sans-serif;
+
+  --color-canvas: var(--canvas);
+  --color-surface: var(--surface);
+  --color-surface-2: var(--surface-2);
+  --color-surface-3: var(--surface-3);
+  --color-line: var(--line);
+  --color-line-strong: var(--line-strong);
+  --color-fg: var(--fg);
+  --color-fg-muted: var(--fg-muted);
+  --color-fg-subtle: var(--fg-subtle);
+  --color-accent: var(--accent);
+  --color-accent-hover: var(--accent-hover);
+  --color-accent-soft: var(--accent-soft);
+  --color-accent-fg: var(--accent-fg);
+  --color-danger: var(--danger);
+  --color-danger-hover: var(--danger-hover);
+  --color-danger-soft: var(--danger-soft);
+  --color-success: var(--success);
+  --color-success-soft: var(--success-soft);
+  --color-warning: var(--warning);
+
+  --shadow-card: 0 1px 2px rgb(16 16 24 / 0.04), 0 1px 1px rgb(16 16 24 / 0.02);
+  --shadow-pop: 0 12px 32px -8px rgb(16 16 24 / 0.18), 0 2px 6px rgb(16 16 24 / 0.06);
+}
+
+:root {
+  color-scheme: light;
+  --canvas: #f6f6f8;
+  --surface: #ffffff;
+  --surface-2: #f2f2f5;
+  --surface-3: #e9e9ee;
+  --line: #e4e4ea;
+  --line-strong: #d2d2da;
+  --fg: #17171c;
+  --fg-muted: #5f5f6b;
+  --fg-subtle: #8b8b97;
+  --accent: #5b4cf0;
+  --accent-hover: #4b3be0;
+  --accent-soft: #eeecff;
+  --accent-fg: #ffffff;
+  --danger: #d92d20;
+  --danger-hover: #b42318;
+  --danger-soft: #fef0ef;
+  --success: #12875a;
+  --success-soft: #e8f7f0;
+  --warning: #c27803;
+
+  /* File-category colours (validated categorical palette, fixed order:
+     documents, images, videos, audio, archives, other). */
+  --cat-documents: #2a78d6;
+  --cat-images: #eb6834;
+  --cat-videos: #1baf7a;
+  --cat-audio: #eda100;
+  --cat-archives: #e87ba4;
+  --cat-other: #008300;
+}
+
+.dark {
+  color-scheme: dark;
+  --canvas: #0c0c10;
+  --surface: #141419;
+  --surface-2: #1b1b21;
+  --surface-3: #24242c;
+  --line: #25252d;
+  --line-strong: #33333d;
+  --fg: #ececf1;
+  --fg-muted: #a3a3ae;
+  --fg-subtle: #74747f;
+  --accent: #7d70f8;
+  --accent-hover: #8f84fa;
+  --accent-soft: rgb(125 112 248 / 0.14);
+  --accent-fg: #ffffff;
+  --danger: #f2706a;
+  --danger-hover: #f58b86;
+  --danger-soft: rgb(242 112 106 / 0.12);
+  --success: #3ccf91;
+  --success-soft: rgb(60 207 145 / 0.12);
+  --warning: #f0b43c;
+  --cat-documents: #3987e5;
+  --cat-images: #d95926;
+  --cat-videos: #199e70;
+  --cat-audio: #c98500;
+  --cat-archives: #d55181;
+  --cat-other: #008300;
+  --shadow-pop: 0 16px 40px -8px rgb(0 0 0 / 0.6), 0 2px 6px rgb(0 0 0 / 0.4);
+}
+
+@layer base {
+  html {
+    -webkit-font-smoothing: antialiased;
+    -moz-osx-font-smoothing: grayscale;
+    text-rendering: optimizeLegibility;
+  }
+  body {
+    @apply bg-canvas text-fg font-sans text-sm;
+    font-feature-settings: 'cv11', 'ss01';
+  }
+  /* One consistent, clearly visible keyboard focus style. */
+  :focus-visible {
+    outline: 2px solid var(--accent);
+    outline-offset: 2px;
+  }
+  ::selection {
+    background: color-mix(in srgb, var(--accent) 25%, transparent);
+  }
+  dialog::backdrop {
+    background: rgb(10 10 16 / 0.45);
+    backdrop-filter: blur(2px);
+  }
+}
+
+@layer utilities {
+  .animate-in {
+    animation: pop-in 140ms cubic-bezier(0.2, 0.9, 0.3, 1.1);
+  }
+  .animate-fade {
+    animation: fade-in 180ms ease-out;
+  }
+  .skeleton {
+    @apply bg-surface-3 rounded-md;
+    animation: pulse 1.4s ease-in-out infinite;
+  }
+}
+
+@keyframes pop-in {
+  from {
+    opacity: 0;
+    transform: translateY(4px) scale(0.98);
+  }
+  to {
+    opacity: 1;
+    transform: none;
+  }
+}
+@keyframes fade-in {
+  from {
+    opacity: 0;
+  }
+  to {
+    opacity: 1;
+  }
+}
+@keyframes pulse {
+  50% {
+    opacity: 0.55;
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  *,
+  *::before,
+  *::after {
+    animation-duration: 1ms !important;
+    transition-duration: 1ms !important;
+  }
+}
